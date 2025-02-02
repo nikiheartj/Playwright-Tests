@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { faker } from '@faker-js/faker';
+import { UserBuilder } from '../src/builder/user.builder';
 import { Navbar } from '../src/Page Object/navbar';
 import { RegisterPage } from '../src/Page Object/registerPage';
 import { HomePage } from '../src/Page Object/homePage';
@@ -15,27 +15,23 @@ test.describe('Update User Settings', () => {
       const homePage = new HomePage(page);
       const settingsPage = new SettinsPage(page);
       const loginPage = new LoginPage(page);
-  
-      const userData = {
-        username: faker.person.firstName(),
-        email: faker.internet.email(),
-        password: faker.internet.password({length: 12}),
-      };
-      
-      const newPassword = {
-        password: faker.internet.password({length: 12}),
-      };
-  
+      const userBuilder = new UserBuilder()
+        .addEmail()
+        .addUsername()
+        .addPassword(6)
+        .generator();
+      const newPassword = new UserBuilder().addPassword(11).generator();
+
       await navbar.open(URL);
       await navbar.gotoRegister();
-      await registerPage.registerUser(userData.username, userData.email, userData.password);
-      await homePage.gotoProfileSettings(userData.username);
+      await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
+      await homePage.gotoProfileSettings(userBuilder.name);
       await settingsPage.updatePassword(newPassword.password); //* Updated password
-      await settingsPage.logout(userData.username);
+      await settingsPage.logout(userBuilder.name);
       await navbar.gotoLogin();
-      await loginPage.loginUser(userData.email, newPassword.password);
+      await loginPage.loginUser(userBuilder.email, newPassword.password);
   
       await expect(homePage.profileName).toBeVisible();
-      await expect(homePage.profileName).toContainText(userData.username);
+      await expect(homePage.profileName).toContainText(userBuilder.name);
     });
   });

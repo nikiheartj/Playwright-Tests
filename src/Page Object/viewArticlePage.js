@@ -10,7 +10,7 @@ export class ViewArticlePage {
         this.postCommentButton = page.getByRole('button', { name: 'Post Comment' });
     }
 
-    async fillComment(text) {
+    async sendComment(text) {
         await this.inputComment.click();
         await this.inputComment.fill(text);
         await this.postCommentButton.click();

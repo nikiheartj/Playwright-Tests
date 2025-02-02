@@ -20,7 +20,7 @@ export class HomePage {
       await this.settingsLink.click();
     }
 
-    async gotoGlobalArticlePage () {
+    async gotoGlobalFeedTab () {
         await this.globalFeedTab.click();
     }
 
