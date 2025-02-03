@@ -15,12 +15,6 @@ export class UserBuilder {
         this.userPassword = faker.internet.password({length: symbol});
         return this;
     }
-/*
-    addNewPassword(symbol = 10) {
-        this.userNewPassword = faker.internet.password({length: symbol});
-        return this;
-    }
-*/
     generator() {
         return {
             email: this.userEmail,
@@ -28,12 +22,4 @@ export class UserBuilder {
             password: this.userPassword,
         };
     }
-/*
-    generatorNewPassword() {
-        return {
-            newPassword: this.userNewPassword,
-        };
-    }
-
-    */
 };

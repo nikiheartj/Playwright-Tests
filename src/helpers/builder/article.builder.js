@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export class ArcticleBuilder {
+export class ArticleBuilder {
     addTitle() {
         this.title = faker.lorem.sentence(5);
         return this;
@@ -25,7 +25,7 @@ export class ArcticleBuilder {
         return {
             title: this.title,
             about: this.about,
-            desciption: this.description,
+            description: this.description,
             tags: this.tags,
         };
     }
