@@ -6,11 +6,16 @@ export class HomePage {
         this.favoriteButton = page.getByRole('button', { name: ' ( 0 )' });
     }
 
+    async getMyArt () {
+        await this.globalFeedTab.click();
+    }
+
     async gotoGlobalFeedTab () {
         await this.globalFeedTab.click();
     }
 
     async addtoFavorite() {
+        await this.myArticle;
         await this.favoriteButton.click();
     }
-};
+}

@@ -18,4 +18,4 @@ export class RegisterPage {
         await this.password.fill(password);
         await this.signUpButton.click();
     }
-};
+}

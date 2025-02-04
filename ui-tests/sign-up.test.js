@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import { UserBuilder } from '../src/helpers/builder/user.builder';
 import { Navbar } from '../src/page-object/navbar';
 import { RegisterPage } from '../src/page-object/registerPage';
-import { HomePage } from '../src/page-object/homePage';
 
 const URL = 'https://realworld.qa.guru/';
 

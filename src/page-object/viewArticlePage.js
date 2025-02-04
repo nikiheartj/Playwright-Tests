@@ -19,4 +19,4 @@ export class ViewArticlePage {
     async addtoFavorite () {
         await this.favoriteButton.click();
     }
-};
+}

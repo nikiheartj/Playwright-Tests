@@ -11,4 +11,4 @@ export class SettingsPage {
         await this.passwordField.fill(password);
         await this.updateSettingsButton.click();
     }
-};
+}

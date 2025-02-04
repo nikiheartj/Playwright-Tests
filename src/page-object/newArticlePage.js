@@ -21,4 +21,4 @@ export class NewArticlePage {
         await this.tags.fill(tags);
         await this.publishButton.click();
     }
-};
+}
