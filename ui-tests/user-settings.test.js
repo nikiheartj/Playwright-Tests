@@ -1,9 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { UserBuilder } from '../src/helpers/builder/user.builder';
-import { Navbar } from '../src/page-object/navbar';
-import { RegisterPage } from '../src/page-object/registerPage';
-import { SettingsPage } from '../src/page-object/settingsPage';
-import { LoginPage } from '../src/page-object/loginPage';
+import { Navbar, RegisterPage, SettingsPage, LoginPage } from '../src/page-object/index';
+import { UserBuilder } from '../src/helpers/builder/index';
 
 const URL = 'https://realworld.qa.guru/';
 
@@ -18,7 +15,9 @@ test.describe('Update User Settings', () => {
         .addUsername()
         .addPassword(6)
         .generator();
-      const newPassword = new UserBuilder().addPassword(11).generator();
+      const newPassword = new UserBuilder()
+        .addPassword(11)
+        .generator();
       
       await navbar.open(URL);
       await navbar.gotoSinUpPage();
