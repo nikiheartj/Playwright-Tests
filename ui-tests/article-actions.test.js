@@ -11,20 +11,6 @@ import { LoginPage } from '../src/page-object/loginPage';
 const URL = 'https://realworld.qa.guru/';
 
 test.describe('User Actions', () => {
-  // const userBuilder = new UserBuilder()
-  //   .addEmail()
-  //   .addUsername()
-  //   .addPassword(6)
-  //   .generator();
-  // test('Sign Up', async ({ page }) => {
-  //   const navbar = new Navbar(page);
-  //   const registerPage = new RegisterPage(page);
-
-  //   await navbar.open(URL);
-  //   await navbar.gotoSinUpPage();
-  //   await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
-  // });
-
   const USERDATA = {
     email: 'niki.heartj@gmail.com',
     password: 'niki.heartj@gmail.com',
