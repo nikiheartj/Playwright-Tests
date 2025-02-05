@@ -11,24 +11,10 @@ import { LoginPage } from '../src/page-object/loginPage';
 const URL = 'https://realworld.qa.guru/';
 
 test.describe('User Actions', () => {
-  // const userBuilder = new UserBuilder()
-  //   .addEmail()
-  //   .addUsername()
-  //   .addPassword(6)
-  //   .generator();
-  // test('Sign Up', async ({ page }) => {
-  //   const navbar = new Navbar(page);
-  //   const registerPage = new RegisterPage(page);
-
-  //   await navbar.open(URL);
-  //   await navbar.gotoSinUpPage();
-  //   await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
-  // });
-
-  const userData = {
-    email: `niki.heartj@gmail.com`,
-    password: `12345`,
-    name: `nikita`,
+  const USERDATA = {
+    email: 'niki.heartj@gmail.com',
+    password: 'niki.heartj@gmail.com',
+    name: 'nikita',
   };
 
   test.beforeEach('Login', async ({ page }) => {
@@ -37,7 +23,7 @@ test.describe('User Actions', () => {
 
     await navbar.open(URL);
     await navbar.gotoLoginPage();
-    await loginPage.loginUser(userData.email, userData.password);
+    await loginPage.loginUser(USERDATA.email, USERDATA.password);
   });
 
   test('Create Article', async ({ page }) => {
@@ -100,10 +86,12 @@ test.describe('User Actions', () => {
       articleBuilder.about,
       articleBuilder.description,
       articleBuilder.tags);
-    await navbar.gotoProfilePage(userData.name);
+    await page.waitForTimeout(1000); //* Тест отказывается переходить к следуещему шагу (строчке 104), если не сделать задержку. По всей видимости это из-за того что какое-то время публикуется статья и в этот момент нажатия на профайл ссылку в дропдауне профайл - не происходит. 
+    await navbar.gotoProfilePage(USERDATA.name);
     await profilePage.addtoFavorite();
     await profilePage.gomyFavoriteArtTab(); 
       
     await expect(page.getByRole('main')).toContainText('( 1 )');
+    await expect(page.getByRole('link', { name: articleBuilder.title })).toBeVisible();
   });
 });
