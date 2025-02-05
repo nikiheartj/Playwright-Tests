@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { UserBuilder } from '../src/helpers/builder/user.builder';
-import { Navbar } from '../src/page-object/navbar';
-import { RegisterPage } from '../src/page-object/registerPage';
+import { Navbar, RegisterPage } from '../src/page-object/index';
+import { UserBuilder } from '../src/helpers/builder/index';
 
 const URL = 'https://realworld.qa.guru/';
 

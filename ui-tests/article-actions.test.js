@@ -1,12 +1,6 @@
-// import { UserBuilder } from '../src/helpers/builder/user.builder';
 import { test, expect } from '@playwright/test';
-import { Navbar } from '../src/page-object/navbar';
-import { NewArticlePage } from '../src/page-object/newArticlePage';
-import { ViewArticlePage } from '../src/page-object/viewArticlePage';
-import { ArticleBuilder } from '../src/helpers/builder/article.builder';
-import { CommentBuilder } from '../src/helpers/builder/comment.builder';
-import { ProfilePage } from '../src/page-object/profilePage';
-import { LoginPage } from '../src/page-object/loginPage';
+import { Navbar, NewArticlePage, ViewArticlePage, ProfilePage, LoginPage } from '../src/page-object/index';
+import { ArticleBuilder, CommentBuilder } from '../src/helpers/builder/index';
 
 const URL = 'https://realworld.qa.guru/';
 
