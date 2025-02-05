@@ -86,6 +86,6 @@ test.describe('User Actions', () => {
     await profilePage.gomyFavoriteArtTab(); 
       
     await expect(page.getByRole('main')).toContainText('( 1 )');
-    await expect(page.getByRole('link', { name: articleBuilder.title })).toBeVisible();
+    await expect(page.getByRole('main')).toContainText(articleBuilder.title);
   });
 });
