@@ -12,10 +12,16 @@ const URL = 'https://realworld.qa.guru/';
       .addUsername()
       .addPassword(6)
       .generator();
-
-    await navbar.open(URL);
-    await navbar.gotoSinUpPage();
-    await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
-    
-    await expect(navbar.profileName).toContainText(userBuilder.name);
+    await test.step('Open link: https://realworld.qa.guru/', async () => {
+      await navbar.open(URL);
+    });
+    await test.step('Go to Sign Up page', async () => {
+      await navbar.gotoSinUpPage();
+    });
+    await test.step('Register user account', async () => {
+      await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
+    });
+    await test.step('User is registered', async () => {
+      await expect(navbar.profileName).toContainText(userBuilder.name);
+    });
   });

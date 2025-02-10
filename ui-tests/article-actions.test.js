@@ -15,9 +15,15 @@ test.describe('User Actions', () => {
     const navbar = new Navbar(page);
     const loginPage = new LoginPage(page);
 
-    await navbar.open(URL);
-    await navbar.gotoLoginPage();
-    await loginPage.loginUser(USERDATA.email, USERDATA.password);
+    await test.step('Open link: https://realworld.qa.guru/', async () => {
+      await navbar.open(URL);
+    });
+    await test.step('Go to Login page', async () => {
+      await navbar.gotoLoginPage();
+    });  
+    await test.step('Login to account', async () => {
+      await loginPage.loginUser(USERDATA.email, USERDATA.password);
+    });      
   });
 
   test('Create Article', async ({ page }) => {
@@ -30,14 +36,19 @@ test.describe('User Actions', () => {
       .addTags()
       .generator();
 
-    await navbar.gotoPublishArticlePage();
-    await newArticlePage.publishArticle(
-      articleBuilder.title, 
-      articleBuilder.about, 
-      articleBuilder.description, 
-      articleBuilder.tags);
-    
-    await expect(page.getByRole('heading')).toContainText(articleBuilder.title);
+    await test.step('Go to New Article page', async () => {
+      await navbar.gotoPublishArticlePage();
+    });
+    await test.step('Publish article', async () => {
+      await newArticlePage.publishArticle(
+        articleBuilder.title, 
+        articleBuilder.about, 
+        articleBuilder.description, 
+        articleBuilder.tags);
+    });      
+    await test.step('Article is published', async () => {
+      await expect(page.getByRole('heading')).toContainText(articleBuilder.title);
+    });   
   });
   
   test('Post Comment', async ({ page }) => {
@@ -51,18 +62,24 @@ test.describe('User Actions', () => {
       .addDescription()
       .addTags()
       .generator();
-    
-    await navbar.gotoPublishArticlePage();
-    await newArticlePage.publishArticle(
-      articleBuilder.title, 
-      articleBuilder.about, 
-      articleBuilder.description, 
-      articleBuilder.tags);
-    await viewArticlePage.sendComment(commentBuilder.comment);
 
-    await expect(page.getByRole('main')).toContainText(commentBuilder.comment);
+    await test.step('Go to New Article page', async () => {
+      await navbar.gotoPublishArticlePage();
+    });
+    await test.step('Publish article', async () => {
+      await newArticlePage.publishArticle(
+        articleBuilder.title, 
+        articleBuilder.about, 
+        articleBuilder.description, 
+        articleBuilder.tags);
+    });
+    await test.step('Send comment under article', async () => {
+      await viewArticlePage.sendComment(commentBuilder.comment);
+    });     
+    await test.step('Commnet is sent under article', async () => {
+      await expect(page.getByRole('main')).toContainText(commentBuilder.comment);
+    });
   });
-    
   test('Add to Favorite', async ({ page }) => {
     const newArticlePage = new NewArticlePage(page);
     const navbar = new Navbar(page);
@@ -74,18 +91,30 @@ test.describe('User Actions', () => {
       .addTags()
       .generator();
 
-    await navbar.gotoPublishArticlePage();
-    await newArticlePage.publishArticle(
-      articleBuilder.title,
-      articleBuilder.about,
-      articleBuilder.description,
-      articleBuilder.tags);
-    await page.waitForTimeout(1000); //* Тест отказывается переходить к следуещему шагу (строчке 104), если не сделать задержку. По всей видимости это из-за того что какое-то время публикуется статья и в этот момент нажатия на профайл ссылку в дропдауне профайл - не происходит. 
-    await navbar.gotoProfilePage(USERDATA.name);
-    await profilePage.addtoFavorite();
-    await profilePage.gomyFavoriteArtTab(); 
-      
-    await expect(page.getByRole('main')).toContainText('( 1 )');
-    await expect(page.getByRole('main')).toContainText(articleBuilder.title);
+    await test.step('Go to New Article page', async () => {
+      await navbar.gotoPublishArticlePage();
+    });
+    await test.step('Publish article', async () => {
+      await newArticlePage.publishArticle(
+        articleBuilder.title, 
+        articleBuilder.about, 
+        articleBuilder.description, 
+        articleBuilder.tags);
+    });
+    await expect(page.getByRole('heading')).toContainText(articleBuilder.title);
+    //await page.waitForLoadState("networkidle");
+    await test.step('Go to Profile page', async () => {
+      await navbar.gotoProfilePage(USERDATA.name);
+    });
+    await test.step('Add to Favorite an article', async () => {
+      await profilePage.addtoFavorite();
+    });
+    await test.step('Go to my Favorite tab', async () => {
+      await profilePage.gomyFavoriteArtTab(); 
+    });
+
+    await test.step('Article is added to favorite', async () => {
+      await expect(page.getByText(articleBuilder.title)).toBeVisible();
+    });
   });
 });

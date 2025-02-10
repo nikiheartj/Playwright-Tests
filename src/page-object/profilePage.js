@@ -11,7 +11,6 @@ export class ProfilePage {
     }
 
     async addtoFavorite() {
-        // await this.myArticle.getByText(myArticle).click();
         await this.favoriteButton.click();
     }
 }

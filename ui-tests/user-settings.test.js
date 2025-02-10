@@ -18,17 +18,33 @@ test.describe('Update User Settings', () => {
       const newPassword = new UserBuilder()
         .addPassword(11)
         .generator();
-      
-      await navbar.open(URL);
-      await navbar.gotoSinUpPage();
-      await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
-      await navbar.gotoProfileSettings(userBuilder.name);
-      await settingsPage.updatePassword(newPassword.password);
-      await navbar.logout(userBuilder.name);
-      await navbar.gotoLoginPage();
-      await loginPage.loginUser(userBuilder.email, newPassword.password);
-  
-      await expect(navbar.profileName).toBeVisible();
-      await expect(navbar.profileName).toContainText(userBuilder.name);
+      await test.step('Open link: https://realworld.qa.guru/', async () => {
+        await navbar.open(URL);
+      });
+      await test.step('Go to Sign Up page', async () => {
+        await navbar.gotoSinUpPage();
+      });        
+      await test.step('Register user account', async () => {
+        await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
+      });
+      await test.step('Go to Profile Settings', async () => {
+        await navbar.gotoProfileSettings(userBuilder.name);
+      });
+      await test.step('Update password', async () => {
+        await settingsPage.updatePassword(newPassword.password);
+      });
+      await test.step('Logout', async () => {
+        await navbar.logout(userBuilder.name);
+      });  
+      await test.step('Go to Login page', async () => {
+        await navbar.gotoLoginPage();
+      });  
+      await test.step('Login to account', async () => {
+        await loginPage.loginUser(userBuilder.email, newPassword.password);
+      });  
+      await test.step('User is logged in with new password', async () => {
+        await expect(navbar.profileName).toBeVisible();
+        await expect(navbar.profileName).toContainText(userBuilder.name);
+      });    
     });
   });
