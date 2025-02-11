@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 export class NewArticlePage {
     constructor(page) {
         this.page = page;
@@ -11,14 +13,16 @@ export class NewArticlePage {
     }
 
     async publishArticle(title, about, description, tags) {
-        await this.articleTitle.click();
-        await this.articleTitle.fill(title);
-        await this.aboutArticle.click();
-        await this.aboutArticle.fill(about);
-        await this.descriptionArticle.click();
-        await this.descriptionArticle.fill(description);
-        await this.tags.click();
-        await this.tags.fill(tags);
-        await this.publishButton.click();
+        await test.step('Publish article', async () => {
+            await this.articleTitle.click();
+            await this.articleTitle.fill(title);
+            await this.aboutArticle.click();
+            await this.aboutArticle.fill(about);
+            await this.descriptionArticle.click();
+            await this.descriptionArticle.fill(description);
+            await this.tags.click();
+            await this.tags.fill(tags);
+            await this.publishButton.click();
+        });
     }
 }
