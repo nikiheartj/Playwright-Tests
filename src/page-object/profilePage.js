@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 export class ProfilePage {
     constructor(page) {
         this.page = page;
@@ -6,11 +8,16 @@ export class ProfilePage {
         this.favoriteButton = page.getByRole('button', { name: '( 0 )' }).first();
     }
 
+    
     async gomyFavoriteArtTab() {
-        await this.myFavoriteArticles.click();
+        await test.step('Go to my Favorite tab', async () => {
+            await this.myFavoriteArticles.click();
+        });
     }
 
     async addtoFavorite() {
-        await this.favoriteButton.click();
+        await test.step('Add to Favorite', async () => {
+            await this.favoriteButton.click();
+        });
     }
 }

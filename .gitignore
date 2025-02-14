@@ -6,3 +6,7 @@
 /blob-report
 /playwright/.cache
 /.vscode
+/allure-report
+/allure-results
+/.allure
+/history.jsonl

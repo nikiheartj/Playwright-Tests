@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 export class ViewArticlePage {
     constructor(page) {
         this.page = page;
@@ -11,12 +13,17 @@ export class ViewArticlePage {
     }
 
     async sendComment(text) {
-        await this.inputComment.click();
-        await this.inputComment.fill(text);
-        await this.postCommentButton.click();
+        await test.step('Send comment under article', async () => {
+            await this.inputComment.click();
+            await this.inputComment.fill(text);
+            await this.postCommentButton.click();
+        });
     }
 
-    async addtoFavorite () {
-        await this.favoriteButton.click();
+    
+    async addtoFavorite () {        
+        await test.step('Add to Favorite an article', async () => {
+            await this.favoriteButton.click();
+        });
     }
 }

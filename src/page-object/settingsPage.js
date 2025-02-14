@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 export class SettingsPage {
     constructor(page) {
         this.page = page;
@@ -7,8 +9,10 @@ export class SettingsPage {
     }
 
     async updatePassword(password) {
-        await this.passwordField.click();
-        await this.passwordField.fill(password);
-        await this.updateSettingsButton.click();
+        await test.step('Update password', async () => {
+            await this.passwordField.click();
+            await this.passwordField.fill(password);
+            await this.updateSettingsButton.click();
+        });
     }
 }

@@ -1,3 +1,5 @@
+import { test } from "@playwright/test";
+
 export class Navbar {
     constructor(page) {
         this.page = page;
@@ -12,9 +14,11 @@ export class Navbar {
         this.settingsLink = page.getByRole('link', { name: 'Settings' });
         this.profileLink = page.getByRole('link', { name: 'Profile' });
     }
- 
+    
     async open(url) {
-        await this.page.goto(url);    
+        await test.step('Open link: https://realworld.qa.guru/', async () => {
+            await this.page.goto(url);    
+        });
     }
     
     async gotoHomePage() {
@@ -22,29 +26,41 @@ export class Navbar {
     }
     
     async gotoLoginPage() {
-        this.loginLink.click();
+        await test.step('Go to Login page', async () => {
+            this.loginLink.click();
+        });
     }
     
     async gotoProfilePage(username){
-        await this.profileName.getByText(username).click();
-        await this.profileLink.click();
+        await test.step('Go to Profile page', async () => {
+            await this.profileName.getByText(username).click();
+            await this.profileLink.click();
+        });
     }
 
     async gotoProfileSettings(username){
-        await this.profileName.getByText(username).click();
-        await this.settingsLink.click();
+        await test.step('Go to Profile Settings', async () => {
+            await this.profileName.getByText(username).click();
+            await this.settingsLink.click();
+        });
     }
       
     async logout(username) {
-        await this.profileName.getByText(username).click();
-        await this.logoutLink.click();
+        await test.step('Logout', async () => {
+            await this.profileName.getByText(username).click();
+            await this.logoutLink.click();
+        });
     }   
 
     async gotoSinUpPage() {
-        await this.signUpLink.click();
+        await test.step('Go to Sign Up page', async () => {
+            await this.signUpLink.click();
+        });
     }
 
     async gotoPublishArticlePage() {
-        await this.newArticleLink.click();
+        await test.step('Go to Create Article page', async () => {
+            await this.newArticleLink.click();
+        });
     }
 }
