@@ -110,8 +110,8 @@ test.describe('User Actions', () => {
     await profilePage.gomyFavoriteArtTab(); 
 
     await test.step('Expected Result: Article is added to favorite', async () => {
-      // await expect(page.getByRole(articleBuilder.title)).toBeVisible();
-      await expect(page.getByRole('main')).toContainText(articleBuilder.title);
+      // await expect(page.getByText(articleBuilder.title)).toBeVisible();
+      await expect(page.getByText(articleBuilder.title)).toContainText(articleBuilder.title);
     });   
   });
 });
