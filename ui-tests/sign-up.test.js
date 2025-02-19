@@ -6,8 +6,9 @@ import { Navbar, RegisterPage } from '../src/page-object/index';
 import { UserBuilder } from '../src/helpers/builder/index';
 
 const URL = 'https://realworld.qa.guru/';
+test.use({ storageState: { cookies: [], origins: [] } }); //это сброс storage
 
-  test('Sign Up', async ({ page }) => {
+test('Sign Up', async ({ page }) => {
     await allure.owner("Nikita");
     await allure.severity(Severity.BLOCKER);
     await allure.tags("Web interface", "Register User");

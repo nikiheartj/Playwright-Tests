@@ -2,40 +2,24 @@ import * as allure from 'allure-js-commons';
 import { Severity } from "allure-js-commons";
 
 import { test, expect } from '@playwright/test';
-import { Navbar, LoginPage, RegisterPage } from '../src/page-object/index';
-import { UserBuilder } from '../src/helpers/builder/index';
+import { Navbar, LoginPage } from '../src/page-object/index';
+import { USERDATA } from '../ui-tests/setup/userData.js';
 
+test.use({ storageState: { cookies: [], origins: [] } }); //это сброс storage
 
-test.describe('Login', () => {
-    const URL = 'https://realworld.qa.guru/';
-    const userBuilder = new UserBuilder()
-      .addEmail()
-      .addUsername()
-      .addPassword(6)
-      .generator();
+const URL = 'https://realworld.qa.guru/';
 
-    test.beforeEach('Register User', async ({ page }) => {
-      const navbar = new Navbar(page);
-      const registerPage = new RegisterPage(page);
+test('Login User', async ({ page }) => {
+  await allure.owner("Nikita");
+  await allure.severity(Severity.BLOCKER);
 
-      await navbar.open(URL);
-      await navbar.gotoSinUpPage();
-      await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
-      await navbar.logout(userBuilder.name);
-    });
+  const navbar = new Navbar(page);
+  const loginPage = new LoginPage(page);
+  await navbar.open(URL);
+  await navbar.gotoLoginPage();
+  await loginPage.loginUser(USERDATA.email, USERDATA.password);
 
-    test('Login User', async ({ page }) => {
-      await allure.owner("Nikita");
-      await allure.severity(Severity.BLOCKER);
-
-      const navbar = new Navbar(page);
-      const loginPage = new LoginPage(page);
-
-      await navbar.gotoLoginPage();
-      await loginPage.loginUser(userBuilder.email, userBuilder.password);
-
-      await test.step('Expected Result: User is logged in', async () => {
-        await expect(page.getByRole('navigation')).toContainText(userBuilder.name);
-      });
-    });
+  await test.step('Expected Result: User is logged in', async () => {
+    await expect(page.getByRole('navigation')).toContainText(USERDATA.name);
+  });
 });

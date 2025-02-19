@@ -7,9 +7,9 @@ export class ViewArticlePage {
         this.articleTitle = page.getByRole('heading');
         this.articleDescription = page.getByText('description');
         this.inputComment = page.getByRole('textbox', { name: 'Write a comment...' });
-        this.favoriteButton = page.getByRole('button', { name: ' Favorite' }).nth(1);
+        this.favoriteButton = page.getByRole('button', { name: 'Favorite' }).nth(1);
 
-        this.postCommentButton = page.getByRole('button', { name: 'Post Comment' });
+        this.postCommentButton = page.getByRole('button', { name: 'Post Comment' })
     }
 
     async sendComment(text) {
@@ -19,7 +19,6 @@ export class ViewArticlePage {
             await this.postCommentButton.click();
         });
     }
-
     
     async addtoFavorite () {        
         await test.step('Add to Favorite an article', async () => {

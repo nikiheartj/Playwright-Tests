@@ -44,15 +44,23 @@ export default defineConfig({
     // timeout: 9000,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure'
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'setup',
+      use: {...devices['Desktop Chrome']},
+      testMatch: 'ui-tests/setup/sign-in.setup.js',
     },
-
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'],
+            storageState: 'playwright/.auth/userFile.json'
+      },
+      dependencies: ['setup'],
+    },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },

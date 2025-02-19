@@ -7,6 +7,8 @@ import { UserBuilder } from '../src/helpers/builder/index';
 
 const URL = 'https://realworld.qa.guru/';
 
+test.use({ storageState: { cookies: [], origins: [] } }); //это сброс storage
+
 test.describe('Update User Settings', () => {
     test('Change Password', async ({ page }) => {
       await allure.owner("Nikita");
@@ -36,7 +38,6 @@ test.describe('Update User Settings', () => {
       await loginPage.loginUser(userBuilder.email, newPassword.password);
 
       await test.step('Expected Result: User is logged in with a new password', async () => {
-        await expect(navbar.profileName).toBeVisible();
         await expect(navbar.profileName).toContainText(userBuilder.name);
       });    
     });
