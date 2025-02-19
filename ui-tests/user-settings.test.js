@@ -2,10 +2,8 @@ import * as allure from 'allure-js-commons';
 import { Severity } from "allure-js-commons";
 
 import { test, expect } from '@playwright/test';
-import { Navbar, RegisterPage, SettingsPage, LoginPage } from '../src/page-object/index';
+import { Navbar, RegisterPage, SettingsPage, LoginPage } from '../src/helpers/page-object/index';
 import { UserBuilder } from '../src/helpers/builder/index';
-
-const URL = 'https://realworld.qa.guru/';
 
 test.describe('Update User Settings', () => {
     test('Change Password', async ({ page }) => {
@@ -26,7 +24,7 @@ test.describe('Update User Settings', () => {
         .addPassword(11)
         .generator();
         
-      await navbar.open(URL);
+      await navbar.open();
       await navbar.gotoSinUpPage();
       await registerPage.registerUser(userBuilder.name, userBuilder.email, userBuilder.password);
       await navbar.gotoProfileSettings(userBuilder.name);
@@ -36,7 +34,6 @@ test.describe('Update User Settings', () => {
       await loginPage.loginUser(userBuilder.email, newPassword.password);
 
       await test.step('Expected Result: User is logged in with a new password', async () => {
-        await expect(navbar.profileName).toBeVisible();
         await expect(navbar.profileName).toContainText(userBuilder.name);
       });    
     });

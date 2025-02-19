@@ -15,9 +15,9 @@ export class Navbar {
         this.profileLink = page.getByRole('link', { name: 'Profile' });
     }
     
-    async open(url) {
+    async open() {
         await test.step('Open link: https://realworld.qa.guru/', async () => {
-            await this.page.goto(url);    
+            await this.page.goto('.');    
         });
     }
     
