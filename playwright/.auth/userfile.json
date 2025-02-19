@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://realworld.qa.guru",
+      "localStorage": [
+        {
+          "name": "loggedUser",
+          "value": "{\"headers\":{\"Authorization\":\"Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVzdGVsLlNjaG1pdHQ5QHlhaG9vLmNvbSIsImlhdCI6MTczOTgwNjY4MX0.QDiAWMTiKeYbtaJ9R2K_HnqprTLSzzzOSJTX7fOOyw4\"},\"isAuth\":true,\"loggedUser\":{\"email\":\"Estel.Schmitt9@yahoo.com\",\"username\":\"Rozella\",\"bio\":null,\"image\":null,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVzdGVsLlNjaG1pdHQ5QHlhaG9vLmNvbSIsImlhdCI6MTczOTgwNjY4MX0.QDiAWMTiKeYbtaJ9R2K_HnqprTLSzzzOSJTX7fOOyw4\"}}"
+        }
+      ]
+    }
+  ]
+}

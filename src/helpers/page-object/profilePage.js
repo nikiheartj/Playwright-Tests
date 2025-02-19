@@ -6,9 +6,9 @@ export class ProfilePage {
     
         this.myFavoriteArticles = page.getByRole('link', { name: 'Favorited Articles' });
         this.favoriteButton = page.getByRole('button', { name: '( 0 )' }).first();
+        // this.favoritedArticle = page.getByRole('main').first();
     }
 
-    
     async gomyFavoriteArtTab() {
         await test.step('Go to my Favorite tab', async () => {
             await this.myFavoriteArticles.click();
@@ -20,4 +20,6 @@ export class ProfilePage {
             await this.favoriteButton.click();
         });
     }
+    
+    favoritedArticle = (articleTitle) => this.page.locator('a', { hasText: articleTitle });
 }
