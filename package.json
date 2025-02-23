@@ -1,0 +1,27 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "ui": "npx playwright test --ui",
+    "reportAwesome": "npx allure awesome ./allure-results",
+    "reportClassic": "npx allure classic ./allure-results",
+    "runAllure": "npx allure run -- npm test",
+    "openAllure": "npx allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.10.9"
+  },
+  "dependencies": {
+    "allure": "^3.0.0-beta.8",
+    "allure-playwright": "^3.1.0"
+  }
+}
